@@ -38,7 +38,7 @@ def parse_json_files(file_names, parse_function, percentage_to_parse=1):
 def parse_json_file(file_name, parse_function):
     """Parses the given JSON file using the given parsing function"""
 
-    logging.info('parsing %s' % file_name)
+    logging.debug('parsing %s' % file_name)
     try:
         with open(file_name) as data_file:
             json_obj = json.load(data_file)
