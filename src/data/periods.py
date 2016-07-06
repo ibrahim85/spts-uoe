@@ -8,11 +8,12 @@ import numpy as np
 from datetime import datetime, timedelta
 from helper import filter_by_id, filter_by_time
 
+day_start = lambda timestamp: timestamp.replace(hour=0, minute=0, second=0, microsecond=0)
 morning_peaktime_start = lambda timestamp: timestamp.replace(hour=7, minute=0, second=0, microsecond=0)
 morning_peaktime_end = lambda timestamp: timestamp.replace(hour=10, minute=0, second=0, microsecond=0)
 evening_peaktime_start = lambda timestamp: timestamp.replace(hour=16, minute=0, second=0, microsecond=0)
 evening_peaktime_end = lambda timestamp: timestamp.replace(hour=19, minute=0, second=0, microsecond=0)
-day_time_end = lambda timestamp: timestamp.replace(hour=23, minute=59, second=59, microsecond=999999)
+cumulative_day_end = lambda timestamp: (evening_peaktime_end(timestamp) + timedelta(days=1)).replace(hour=7, minute=0, second=0, microsecond=0)
 
 def find_next(df, start_loc):
     if start_loc + 1 == len(df):
@@ -28,7 +29,7 @@ def get_periods(start, end):
               morning_peaktime_end(start), 
               evening_peaktime_start(start), 
               evening_peaktime_end(start), 
-              day_time_end(start)])
+              cumulative_day_end(start)])
               
     start_split = next_split(splits, start)
     end_split = next_split(splits, end)
@@ -51,13 +52,23 @@ def are_different_days(start, end):
 def is_peaktime(period):    
     start = period[0]
     end = period[-1]
+    
+    if (start >= day_start(start)) & (end <= morning_peaktime_start(end)):
+        return True, 'NON_PEAK'
+        
     if (start >= morning_peaktime_start(start)) & (end <= morning_peaktime_end(end)):
         return True, 'MORNING_PEAK'
         
+    if (start >= morning_peaktime_end(start)) & (end <= evening_peaktime_start(end)):
+        return True, 'NON_PEAK'
+        
     if (start >= evening_peaktime_start(start)) & (end <= evening_peaktime_end(end)):
         return True, 'EVENING_PEAK'
+        
+    if (start >= evening_peaktime_end(start)) & (end <= cumulative_day_end(end)):
+        return True, 'NON_PEAK'        
     
-    return False, 'NON-PEAK'
+    raise ValueError('Unclassifiable period %s,%s' % (start, end))
 
 def find_zero_periods_of(station_id, df, col_name):
     df = filter_by_id(df, station_id).copy().reset_index()
@@ -117,11 +128,7 @@ def get_ellapsed_time(df, by='GroupId'):
     return collapsed
     
 def get_period_day(period):
-    start = period[0]
-    for entry in period:
-        if are_different_days(start, entry):
-            raise ValueError('Different days in period')
-    return start.date()
+    return period[0].date()
 
 #######################################################
     
@@ -132,12 +139,12 @@ class PeriodsTest(unittest.TestCase):
     #@unittest.skip        
     def test_run(self):
         start = datetime(2016,6,12, 6, 45)
-        end = datetime(2016,6,14, 3, 45)
+        end = datetime(2016,6,14, 7, 45)
         
         distinct_days = True
         while distinct_days:
             distinct_days, current_end, next_start = get_periods(start, end)
-            print start, current_end
+            print start, current_end, is_peaktime((start, current_end))[1], get_period_day((start, end))
             start = next_start   
             
     def test_bothnonpeak_close(self):
