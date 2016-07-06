@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 2331, in main
+    mainwindow = run_spyder(app, options, args)
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 2215, in run_spyder
+    main.setup()
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 1078, in setup
+    self.setup_layout(default=False)
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 1324, in setup_layout
+    is_maximized, is_fullscreen)
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 1246, in set_window_settings
+    self.__update_fullscreen_action()
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/spyder.py", line 1656, in __update_fullscreen_action
+    self.fullscreen_action.setIcon(get_icon(icon))
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/utils/qthelpers.py", line 47, in get_icon
+    icon = QIcon(get_image_path(name))
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/site-packages/spyderlib/baseconfig.py", line 195, in get_image_path
+    full_path = osp.join(img_path, name)
+  File "/home/jfconavarrete/Documents/Work/Config/anaconda2/lib/python2.7/posixpath.py", line 68, in join
+    if b.startswith('/'):
+KeyboardInterrupt
