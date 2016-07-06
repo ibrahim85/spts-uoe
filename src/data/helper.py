@@ -34,7 +34,7 @@ def add_station_info(df, stations, cols=None):
     if cols is None:
         df_stations.drop(['TerminalName','PlaceType','Installed','Temporary','Locked','RemovalDate','InstallDate','ShortName'], axis=1, inplace=True)
     else:
-        to_drop = set(stations.columns) - set(['Priority'])
+        to_drop = set(stations.columns) - set(cols)
         df_stations.drop(to_drop, axis=1, inplace=True)
     return df_stations
 

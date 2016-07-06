@@ -12,6 +12,7 @@ morning_peaktime_start = lambda timestamp: timestamp.replace(hour=7, minute=0, s
 morning_peaktime_end = lambda timestamp: timestamp.replace(hour=10, minute=0, second=0, microsecond=0)
 evening_peaktime_start = lambda timestamp: timestamp.replace(hour=16, minute=0, second=0, microsecond=0)
 evening_peaktime_end = lambda timestamp: timestamp.replace(hour=19, minute=0, second=0, microsecond=0)
+day_time_end = lambda timestamp: timestamp.replace(hour=23, minute=59, second=59, microsecond=999999)
 
 def find_next(df, start_loc):
     if start_loc + 1 == len(df):
@@ -23,55 +24,42 @@ def get_periods(start, end):
     current_end = None
     next_start = None
     
-    # check if the dates are in two different days
-    if are_different_days(start, end):
-        if start > evening_peaktime_end(start):
-            current_end = start.replace(hour=23, minute=59, second=59, microsecond=999999)
-            next_start = (start + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-            return True, current_end, next_start
-            
-        
-    # check if the start or end are fall between peak times
-    is_start_peaktime, start_time = is_peaktime(start)
-    is_end_peaktime, end_time = is_peaktime(end)
-    if is_start_peaktime & (not is_end_peaktime):
-        current_end = morning_peaktime_end(start) if start_time == 'MORNING_PEAK' else evening_peaktime_end(start)
-        next_start = current_end + timedelta(minutes=1)
+    splits = np.array([morning_peaktime_start(start), 
+              morning_peaktime_end(start), 
+              evening_peaktime_start(start), 
+              evening_peaktime_end(start), 
+              day_time_end(start)])
+              
+    start_split = next_split(splits, start)
+    end_split = next_split(splits, end)
+    
+    if start_split == end_split:
+        return False, end, None
+    else:
+        current_end = start_split
+        next_start = current_end if end_split is not None else current_end + timedelta(microseconds=1)
         return True, current_end, next_start
-    if (not is_start_peaktime) & is_end_peaktime:        
-        next_start = morning_peaktime_start(end) if end_time == 'MORNING_PEAK' else evening_peaktime_start(end)
-        current_end = next_start - timedelta(minutes=1)
-        return True, current_end, next_start
-    if is_start_peaktime & is_end_peaktime & (start_time != end_time):
-        current_end = morning_peaktime_end(start)
-        next_start = current_end + timedelta(minutes=1)
-        return True, current_end, next_start
-        
-    # check if start and end enclose peak times
-    if (start < morning_peaktime_start(start)) & (end > morning_peaktime_end(end)):        
-        current_end = morning_peaktime_start(start) - timedelta(minutes=1)
-        next_start = morning_peaktime_start(start)
-        return True, current_end, next_start
-    if (start < evening_peaktime_start(start)) & (evening_peaktime_end(end) < end):        
-        current_end = evening_peaktime_start(start) - timedelta(minutes=1)
-        next_start = evening_peaktime_start(start)
-        return True, current_end, next_start
-        
-    return False, end, None    
+    
+def next_split(splits, timestamp):
+    for split_time in splits:
+        if timestamp < split_time:
+            return split_time            
 
 def are_different_days(start, end):
     return (end.date() - start.date()).days > 0
 
-def is_peaktime(timestamp):    
-    if (timestamp >= morning_peaktime_start(timestamp)) & (timestamp <= morning_peaktime_end(timestamp)):
+def is_peaktime(period):    
+    start = period[0]
+    end = period[-1]
+    if (start >= morning_peaktime_start(start)) & (end <= morning_peaktime_end(end)):
         return True, 'MORNING_PEAK'
         
-    if (timestamp >= evening_peaktime_start(timestamp)) & (timestamp <= evening_peaktime_end(timestamp)):
+    if (start >= evening_peaktime_start(start)) & (end <= evening_peaktime_end(end)):
         return True, 'EVENING_PEAK'
     
     return False, 'NON-PEAK'
 
-def find_zero_periods_of(station_id, df, col_name, group=False):
+def find_zero_periods_of(station_id, df, col_name):
     df = filter_by_id(df, station_id).copy().reset_index()
 
     entries = []
@@ -81,46 +69,50 @@ def find_zero_periods_of(station_id, df, col_name, group=False):
             continue
             
         start, end = df.loc[idx]['Timestamp'], next_reading['Timestamp']                
-        periodId = uuid.uuid4()
+        group_id = uuid.uuid4()
         
         distinct_days = True
         while distinct_days:
             distinct_days, current_end, next_start = get_periods(start, end)
             
-            if not group:
-                periodId = uuid.uuid4() 
+            period_id = uuid.uuid4() 
             
             # create entries
             entries.append({
                 'Id': station_id,
                 'Timestamp': start,
-                'PeriodId': periodId
+                'PeriodId': period_id,
+                'GroupId': group_id
             })
         
             entries.append({
                 'Id': station_id,
                 'Timestamp': current_end,
-                'PeriodId': periodId
+                'PeriodId': period_id,
+                'GroupId': group_id
             })
             
             start = next_start        
         
     return entries
 
-def find_zero_periods(df, col_name, group=False):
+def find_zero_periods(df, col_name):
     periods = []
-    [periods.append(find_zero_periods_of(station_id, df, col_name, group)) for station_id in df['Id'].unique()]
+    [periods.append(find_zero_periods_of(station_id, df, col_name)) for station_id in df['Id'].unique()]
     return pd.DataFrame(list(itertools.chain.from_iterable(periods))) 
 
-def group_ellapsed(df):
+def get_ellapsed_time(df, by='GroupId'):
     ellapsed = lambda x: np.round((x[-1] - x[0]) / pd.np.timedelta64(1, 'm'))
     
-    collapsed = df.groupby(['Id', 'PeriodId']).aggregate(lambda x: tuple(x))
+    collapsed = df.groupby(['Id', by]).aggregate(lambda x: tuple(x))
     collapsed['Ellapsed'] = collapsed['Timestamp'].apply(ellapsed)
     collapsed.reset_index(level=0, inplace=True)
     collapsed.reset_index(level=0, inplace=True)
     
     collapsed.rename(columns={'Timestamp': 'Period'}, inplace=True)
+    
+    if by == 'GroupId':
+        collapsed['Period'] = collapsed['Period'].apply(lambda x: (x[0], x[-1]))
     
     return collapsed
     
@@ -130,10 +122,77 @@ def get_period_day(period):
         if are_different_days(start, entry):
             raise ValueError('Different days in period')
     return start.date()
+
+#######################################################
     
-def get_peak_hours(period):
-    start = period[0]
-    for entry in period:
-        if is_peaktime(start)[1] != is_peaktime(entry)[1]:
-            raise ValueError('Different times in period %s != %s' % (start, entry))
-    return is_peaktime(start)[1]
+import unittest
+
+class PeriodsTest(unittest.TestCase):
+    
+    #@unittest.skip        
+    def test_run(self):
+        start = datetime(2016,6,12, 6, 45)
+        end = datetime(2016,6,14, 3, 45)
+        
+        distinct_days = True
+        while distinct_days:
+            distinct_days, current_end, next_start = get_periods(start, end)
+            print start, current_end
+            start = next_start   
+            
+    def test_bothnonpeak_close(self):
+        start = datetime(2016,6,13, 5, 45)
+        end = datetime(2016,6,14, 6, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertFalse(cont)
+        self.assertEqual(current_end, end)
+        self.assertEqual(next_start)
+            
+    def test_bothnonpeak_close(self):
+        start = datetime(2016,6,13, 5, 45)
+        end = datetime(2016,6,13, 6, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertFalse(cont)
+        self.assertEqual(current_end, end)
+        self.assertIsNone(next_start)
+        
+    def test_bothnonpeak_apart(self):
+        start = datetime(2016,6,13, 5, 45)
+        end = datetime(2016,6,13, 11, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertTrue(cont)
+        self.assertEqual(current_end, morning_peaktime_start(start))
+        self.assertEqual(next_start, morning_peaktime_start(start))
+    
+    def test_start_nonpeak_endpeak(self):
+        start = datetime(2016,6,13, 5, 45)
+        end = datetime(2016,6,13, 7, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertTrue(cont)
+        self.assertEqual(current_end, morning_peaktime_start(start))
+        self.assertEqual(next_start, morning_peaktime_start(start))
+        
+    def test_startpeak_endpeak(self):
+        start = datetime(2016,6,13, 7, 45)
+        end = datetime(2016,6,13, 8, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertFalse(cont)
+        self.assertEqual(current_end, end)
+        self.assertIsNone(next_start)
+        
+    def test_startpeak_endnonpeak(self):
+        start = datetime(2016,6,13, 9, 45)
+        end = datetime(2016,6,13, 10, 45)
+        
+        cont,current_end, next_start = get_periods(start, end)
+        self.assertTrue(cont)
+        self.assertEqual(current_end, morning_peaktime_end(start))
+        self.assertEqual(next_start, morning_peaktime_end(start))
+    
+#if __name__ == '__main__':
+#    unittest.main()
