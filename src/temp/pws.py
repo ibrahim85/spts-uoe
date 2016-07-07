@@ -115,3 +115,16 @@ def parse_observation(element):
 
 pwss = pd.DataFrame(list(itertools.chain.from_iterable(records)))
 pwss
+
+##############################################################################################
+
+import math
+
+df = pd.concat([pi24_results.xs((1.0, 'MORNING_PEAK'), level=('Priority', 'PeakHours')), 
+               pi24_results.xs((1.0, 'EVENING_PEAK'), level=('Priority', 'PeakHours')),
+               pi24_results.xs((1.0, 'NON_PEAK'), level=('Priority', 'PeakHours'))],
+               axis=1)
+df.columns = ['MorningPeak', 'EveningPeak', 'NonPeak']
+#df.EveningPeak = df.EveningPeak - df.MorningPeak
+#df.EveningPeak = df.EveningPeak.apply(math.fabs)
+df.plot.line()

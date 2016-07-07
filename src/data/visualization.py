@@ -1,4 +1,5 @@
 import folium
+import matplotlib.colors as clrs
 
 lon_min_longitude = -0.489
 lon_min_latitude = 51.28
@@ -22,3 +23,6 @@ def draw_stations_map(stations_df, create_marker, london_map=None):
 
     return london_map
 
+def cmap_to_hex(cmap, value):
+    rgb = cmap(value)[:3]
+    return clrs.rgb2hex(rgb)
