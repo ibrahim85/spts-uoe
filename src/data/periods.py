@@ -129,6 +129,12 @@ def get_ellapsed_time(df, by='GroupId'):
     
 def get_period_day(period):
     return period[0].date()
+    
+def max_ellapsed_filter(df):
+    peak_selector = df.PeakHours.isin(['MORNING_PEAK', 'EVENING_PEAK'])
+    threshold_selector = df.Ellapsed >= 30
+    priority_selector = df.Priority == 1.0
+    return df[peak_selector & threshold_selector & priority_selector]
 
 #######################################################
     
