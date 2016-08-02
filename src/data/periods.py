@@ -1,12 +1,13 @@
-import logging
 import itertools
 import uuid
 
+import seaborn as sns
 import pandas as pd
 import numpy as np
 
 from datetime import datetime, timedelta
 from helper import filter_by_id, filter_by_time
+from matplotlib.ticker import FuncFormatter
 
 day_start = lambda timestamp: timestamp.replace(hour=0, minute=0, second=0, microsecond=0)
 morning_peaktime_start = lambda timestamp: timestamp.replace(hour=7, minute=0, second=0, microsecond=0)
@@ -20,8 +21,14 @@ def find_next(df, start_loc):
         return None
     else:    
         return df.loc[start_loc + 1]
+        
+def split_by_day(start, end):
+    if (end.date() - start.date()).days > 0:
+        return True, start.replace(hour=23, minute=59, second=59), (start + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    else:
+        return False, end, None
             
-def get_periods(start, end):
+def split_by_peakhours(start, end):
     current_end = None
     next_start = None
     
@@ -70,7 +77,7 @@ def is_peaktime(period):
     
     raise ValueError('Unclassifiable period %s,%s' % (start, end))
 
-def find_zero_periods_of(station_id, df, col_name):
+def find_zero_periods_of(station_id, df, col_name, split_fn):
     df = filter_by_id(df, station_id).copy().reset_index()
 
     entries = []
@@ -84,7 +91,7 @@ def find_zero_periods_of(station_id, df, col_name):
         
         distinct_days = True
         while distinct_days:
-            distinct_days, current_end, next_start = get_periods(start, end)
+            distinct_days, current_end, next_start = split_fn(start, end)
             
             period_id = uuid.uuid4() 
             
@@ -107,9 +114,9 @@ def find_zero_periods_of(station_id, df, col_name):
         
     return entries
 
-def find_zero_periods(df, col_name):
+def find_zero_periods(df, col_name, split_fn=split_by_peakhours):
     periods = []
-    [periods.append(find_zero_periods_of(station_id, df, col_name)) for station_id in df['Id'].unique()]
+    [periods.append(find_zero_periods_of(station_id, df, col_name, split_fn)) for station_id in df['Id'].unique()]
     return pd.DataFrame(list(itertools.chain.from_iterable(periods))) 
 
 def get_ellapsed_time(df, by='GroupId'):
@@ -135,6 +142,27 @@ def max_ellapsed_filter(df):
     threshold_selector = df.Ellapsed >= 30
     priority_selector = df.Priority == 1.0
     return df[peak_selector & threshold_selector & priority_selector]
+    
+def get_day_range(timestamp):
+    return timestamp.replace(hour=7, minute=0, second=0, microsecond=0), (timestamp + timedelta(days=1)).replace(hour=6, minute=59, second=59, microsecond=999999)
+    
+epoch_formatter = FuncFormatter(lambda x, pos: datetime.fromtimestamp(x).strftime("%H:%M"))
+    
+def plot_periods(df, start, end, ids=None):
+    df = df[df['Id'].isin(ids)]
+    df = filter_by_time(df, start, end).copy()
+    df['Day'] = df['Timestamp'].apply(lambda x: x.strftime("%d/%m"))
+    df['Timestamp'] = df['Timestamp'].apply(lambda x: x.replace(year=1970, month=1, day=1))
+    df['Epoch'] = df['Timestamp'].apply(lambda x: long(x.strftime('%s')))
+                
+    day_start, day_end = get_day_range(df.iloc[0]['Timestamp'])
+    g = sns.FacetGrid(df, col="Day", col_wrap=3, size=4, xlim=(-3600, 82799), sharey=False)
+    g = g.map(sns.pointplot, "Epoch", "Id", "PeriodId", palette="hls", join=False, markers='+', col_order=ids)
+    g = g.set(xticks=[7200, 21600, 32400, 54000, 64800, 75600])
+    g.set_xticklabels(rotation=90)
+    [ax.xaxis.set_major_formatter(epoch_formatter) for ax in g.axes]
+    
+    return g
 
 #######################################################
     

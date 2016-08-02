@@ -1,8 +1,7 @@
 import logging
 import pandas as pd
 
-from datetime import datetime
-from matplotlib.ticker import FuncFormatter
+from datetime import datetime, timedelta
     
 global_start = datetime(2016,5,16)
 global_end = datetime(2016,6,26)
@@ -30,16 +29,17 @@ def filter_by_time(df, start, end, col='Timestamp'):
 def filter_by_id(df, idval):
     return df[df['Id'] == idval]
     
-def add_station_info(df, stations, cols=None):
-    df_stations = df.merge(stations, on='Id', how='left')
+def add_station_info(df, stations, cols=None, use_indexes=False):
+    if use_indexes:
+        df_stations = df.merge(stations, left_index=True, right_index=True, how='left')
+    else:
+        df_stations = df.merge(stations, on='Id', how='left')
     if cols is None:
         df_stations.drop(['TerminalName','PlaceType','Installed','Temporary','Locked','RemovalDate','InstallDate','ShortName'], axis=1, inplace=True)
     else:
         to_drop = set(stations.columns) - set(cols)
         df_stations.drop(to_drop, axis=1, inplace=True)
     return df_stations
-
-epoch_formatter = FuncFormatter(lambda x, pos: datetime.fromtimestamp(x).timestamp.strftime("%H:%M"))
 
 def series_to_df(columns, series):
     df = pd.concat(series, axis=1)
@@ -53,3 +53,4 @@ def map_priority_color(priority):
         return '#3333ff', '#0000cc'
     else: 
         return '#ffff1a', '#b3b300'
+    
