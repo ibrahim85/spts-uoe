@@ -91,7 +91,13 @@ def find_zero_periods_of(station_id, df, col_name, split_fn):
         
         distinct_days = True
         while distinct_days:
-            distinct_days, current_end, next_start = split_fn(start, end)
+            try:
+                distinct_days, current_end, next_start = split_fn(start, end)
+            except:
+                print start
+                print end
+                print '*****************'
+                raise ValueError('A very specific bad thing happened')
             
             period_id = uuid.uuid4() 
             
@@ -157,10 +163,11 @@ def plot_periods(df, start, end, ids=None):
                 
     day_start, day_end = get_day_range(df.iloc[0]['Timestamp'])
     g = sns.FacetGrid(df, col="Day", col_wrap=3, size=4, xlim=(-3600, 82799), sharey=False)
-    g = g.map(sns.pointplot, "Epoch", "Id", "PeriodId", palette="hls", join=False, markers='+', col_order=ids)
+    g = g.map(sns.pointplot, "Epoch", "Id", "PeriodId", palette=sns.xkcd_palette(["windows blue"]), join=False, markers='+', col_order=ids)
     g = g.set(xticks=[7200, 21600, 32400, 54000, 64800, 75600])
     g.set_xticklabels(rotation=90)
     [ax.xaxis.set_major_formatter(epoch_formatter) for ax in g.axes]
+    [ax.set_xlabel('Time of Day') for ax in g.axes[3:]]
     
     return g
 
