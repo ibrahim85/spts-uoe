@@ -1,4 +1,5 @@
-# poll endpoint every 5 minutes
 */5 * * * * /home/ec2-user/dissertation/ingestion/collect.sh /home/ec2-user/dissertation/data/bike BIKE "https://api.tfl.gov.uk/BikePoint?app_id=6d4df6d1&app_key=768890f7c0cf191d6f673514332ec002" "jfco.navarrete@gmail.com" "jfco.navarrete@gmail.com"
-# move data from the given folder to s3 every hour
 0 * * * * /home/ec2-user/dissertation/ingestion/upload.sh /home/ec2-user/dissertation/data/bike BIKE tfl-bike-data
+*/5 * * * * /home/ec2-user/dissertation/ingestion/collect.sh /home/ec2-user/dissertation/data/tube TUBE "https://api.tfl.gov.uk/Line/bakerloo,central,circle,district,hammersmith-city,jubilee,metropolitan,northern,piccadilly,victoria,waterloo-city,tfl-rail,london-overground,dlr/Arrivals??app_id=6d4df6d1&app_key=768890f7c0cf191d6f673514332ec002" "jfco.navarrete@gmail.com" "jfco.navarrete@gmail.com"
+0 * * * * /home/ec2-user/dissertation/ingestion/upload.sh /home/ec2-user/dissertation/data/tube TUBE tfl-tube-data
+

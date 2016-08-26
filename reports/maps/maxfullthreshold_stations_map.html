@@ -1,0 +1,1909 @@
+
+        <!DOCTYPE html>
+        <head>
+            
+        
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://rawgithub.com/lvoogdt/Leaflet.awesome-markers/2.0/develop/dist/leaflet.awesome-markers.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster-src.js"></script>
+        
+        
+        
+            
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://rawgit.com/lvoogdt/Leaflet.awesome-markers/2.0/develop/dist/leaflet.awesome-markers.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" />
+        
+        
+        
+            
+        
+            <link rel="stylesheet" href="https://raw.githubusercontent.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
+        
+        
+        
+            
+            <style>
+
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                }
+
+            #map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+            
+        
+            
+            <style> #map_670e4bcf88de4ae28f386c1f27c4a437 {
+                position : relative;
+                width : 100.0%;
+                height: 100.0%;
+                left: 0.0%;
+                top: 0.0%;
+                }
+            </style>
+        
+        
+        
+        </head>
+        <body>
+            
+        
+            
+            <div class="folium-map" id="map_670e4bcf88de4ae28f386c1f27c4a437" ></div>
+        
+        
+        
+        </body>
+        <script>
+            
+        
+            
+
+            var southWest = L.latLng(51.28, -0.489);
+            var northEast = L.latLng(51.686, 0.236);
+            var bounds = L.latLngBounds(southWest, northEast);
+
+            var map_670e4bcf88de4ae28f386c1f27c4a437 = L.map('map_670e4bcf88de4ae28f386c1f27c4a437', {
+                                           center:[51.507981,-0.127722],
+                                           zoom: 12,
+                                           maxBounds: bounds,
+                                           layers: [],
+                                           crs: L.CRS.EPSG3857
+                                         });
+            
+        
+        
+            
+            var tile_layer_91ebc8548b5248adbf7233518a9637f4 = L.tileLayer(
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 18,
+                    minZoom: 1,
+                    attribution: 'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+                    detectRetina: false
+                    }
+                ).addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+
+        
+        
+            
+            var tile_layer_250c555e5bb242a09ba9f24354af009c = L.tileLayer(
+                'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 18,
+                    minZoom: 1,
+                    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+                    detectRetina: false
+                    }
+                ).addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+
+        
+        
+            
+
+            var circle_marker_f21f53e5c8cd42a9b636e2a42fe57b46 = L.circle(
+                [51.505044,-0.115851],
+                100,
+                {
+                    color: '#5555ff',
+                    fillColor: '#5555ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_2881edf2a741432e8b44dadc5d6a54b8 = L.popup({maxWidth: '300'});
+
+            
+                var html_6dfdc838ec2947d88b8dee7cb670d2fa = $('         <div id="html_6dfdc838ec2947d88b8dee7cb670d2fa"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_334 - Concert Hall Approach 1, South Bank</div>                 ')[0];
+                popup_2881edf2a741432e8b44dadc5d6a54b8.setContent(html_6dfdc838ec2947d88b8dee7cb670d2fa);
+            
+
+            circle_marker_f21f53e5c8cd42a9b636e2a42fe57b46.bindPopup(popup_2881edf2a741432e8b44dadc5d6a54b8);
+
+            
+        
+        
+            
+
+            var circle_marker_4b6ed074919746b7bca8ee545b87e65f = L.circle(
+                [51.511246,-0.093051],
+                100,
+                {
+                    color: '#800000',
+                    fillColor: '#800000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_484d693b485a4abcb40b6ed64ab98bbd = L.popup({maxWidth: '300'});
+
+            
+                var html_d35b7b370551484da93e4c3e92c5e8ad = $('         <div id="html_d35b7b370551484da93e4c3e92c5e8ad"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_579 - Queen Street 2, Bank</div>                 ')[0];
+                popup_484d693b485a4abcb40b6ed64ab98bbd.setContent(html_d35b7b370551484da93e4c3e92c5e8ad);
+            
+
+            circle_marker_4b6ed074919746b7bca8ee545b87e65f.bindPopup(popup_484d693b485a4abcb40b6ed64ab98bbd);
+
+            
+        
+        
+            
+
+            var circle_marker_efdd2220673d497ab6f73ca58678003d = L.circle(
+                [51.51397,-0.09294],
+                100,
+                {
+                    color: '#b30000',
+                    fillColor: '#b30000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_a16ef7a580ba42d08561162e1eeaec2b = L.popup({maxWidth: '300'});
+
+            
+                var html_33681f46d4eb49baa596099ecb663848 = $('         <div id="html_33681f46d4eb49baa596099ecb663848"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_427 - Cheapside, Bank</div>                 ')[0];
+                popup_a16ef7a580ba42d08561162e1eeaec2b.setContent(html_33681f46d4eb49baa596099ecb663848);
+            
+
+            circle_marker_efdd2220673d497ab6f73ca58678003d.bindPopup(popup_a16ef7a580ba42d08561162e1eeaec2b);
+
+            
+        
+        
+            
+
+            var circle_marker_39f03f24df424a18a511715778baa1fb = L.circle(
+                [51.510484,-0.082989],
+                100,
+                {
+                    color: '#9a0000',
+                    fillColor: '#9a0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_d4e5e2ea8f634c85887439321ac97d90 = L.popup({maxWidth: '300'});
+
+            
+                var html_f2200fac29474be5aa29ffeab8000d09 = $('         <div id="html_f2200fac29474be5aa29ffeab8000d09"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_199 - Great Tower Street, Monument</div>                 ')[0];
+                popup_d4e5e2ea8f634c85887439321ac97d90.setContent(html_f2200fac29474be5aa29ffeab8000d09);
+            
+
+            circle_marker_39f03f24df424a18a511715778baa1fb.bindPopup(popup_d4e5e2ea8f634c85887439321ac97d90);
+
+            
+        
+        
+            
+
+            var circle_marker_7439805dab5f466b9f44e0a67f0ef816 = L.circle(
+                [51.512484,-0.099141],
+                100,
+                {
+                    color: '#b30000',
+                    fillColor: '#b30000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_e8b06647efd94016a1346b2088f68b4b = L.popup({maxWidth: '300'});
+
+            
+                var html_80fe3a6696b74f8d9c488aadcb9c0609 = $('         <div id="html_80fe3a6696b74f8d9c488aadcb9c0609"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_48 - Godliman Street, St. Pauls</div>                 ')[0];
+                popup_e8b06647efd94016a1346b2088f68b4b.setContent(html_80fe3a6696b74f8d9c488aadcb9c0609);
+            
+
+            circle_marker_7439805dab5f466b9f44e0a67f0ef816.bindPopup(popup_e8b06647efd94016a1346b2088f68b4b);
+
+            
+        
+        
+            
+
+            var circle_marker_efb95416bb5d409685a014186d0aaff0 = L.circle(
+                [51.507424,-0.134621],
+                100,
+                {
+                    color: '#b30000',
+                    fillColor: '#b30000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_31128e69f3c1406095a6bcfa3ca39873 = L.popup({maxWidth: '300'});
+
+            
+                var html_28cfedbafb264ebeb837fb7e3ff782ec = $('         <div id="html_28cfedbafb264ebeb837fb7e3ff782ec"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_228 - St. Jamess Square, St. Jamess</div>                 ')[0];
+                popup_31128e69f3c1406095a6bcfa3ca39873.setContent(html_28cfedbafb264ebeb837fb7e3ff782ec);
+            
+
+            circle_marker_efb95416bb5d409685a014186d0aaff0.bindPopup(popup_31128e69f3c1406095a6bcfa3ca39873);
+
+            
+        
+        
+            
+
+            var circle_marker_9efa2383ba4049df8a7ea66158ded172 = L.circle(
+                [51.522853,-0.099994],
+                100,
+                {
+                    color: '#ce0000',
+                    fillColor: '#ce0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_07f60076e5584ca480f822e3819703a0 = L.popup({maxWidth: '300'});
+
+            
+                var html_97605f23c5ed4355a04b0d5fd3d1767c = $('         <div id="html_97605f23c5ed4355a04b0d5fd3d1767c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_246 - Berry Street, Clerkenwell</div>                 ')[0];
+                popup_07f60076e5584ca480f822e3819703a0.setContent(html_97605f23c5ed4355a04b0d5fd3d1767c);
+            
+
+            circle_marker_9efa2383ba4049df8a7ea66158ded172.bindPopup(popup_07f60076e5584ca480f822e3819703a0);
+
+            
+        
+        
+            
+
+            var circle_marker_16163c26ce2249d0ab53c8048ae82ef8 = L.circle(
+                [51.502953,-0.158456],
+                100,
+                {
+                    color: '#ff2121',
+                    fillColor: '#ff2121',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_c1ab4288afe649c9a94c2a194745b98b = L.popup({maxWidth: '300'});
+
+            
+                var html_ed31642579df42d0b000f14efa5ccbc7 = $('         <div id="html_ed31642579df42d0b000f14efa5ccbc7"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_303 - Albert Gate, Hyde Park</div>                 ')[0];
+                popup_c1ab4288afe649c9a94c2a194745b98b.setContent(html_ed31642579df42d0b000f14efa5ccbc7);
+            
+
+            circle_marker_16163c26ce2249d0ab53c8048ae82ef8.bindPopup(popup_c1ab4288afe649c9a94c2a194745b98b);
+
+            
+        
+        
+            
+
+            var circle_marker_057e5dd50d2441d880feb5827be98f16 = L.circle(
+                [51.506613,-0.142844],
+                100,
+                {
+                    color: '#e80000',
+                    fillColor: '#e80000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_6b5f9da4d19b47c99106d97ee47b82d2 = L.popup({maxWidth: '300'});
+
+            
+                var html_77a96706cf464a2cb712e33b625d29f5 = $('         <div id="html_77a96706cf464a2cb712e33b625d29f5"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_541 - Green Park Station, Mayfair</div>                 ')[0];
+                popup_6b5f9da4d19b47c99106d97ee47b82d2.setContent(html_77a96706cf464a2cb712e33b625d29f5);
+            
+
+            circle_marker_057e5dd50d2441d880feb5827be98f16.bindPopup(popup_6b5f9da4d19b47c99106d97ee47b82d2);
+
+            
+        
+        
+            
+
+            var circle_marker_59b17f2e41ad4196b53f04309ad7e9de = L.circle(
+                [51.497829,-0.13544],
+                100,
+                {
+                    color: '#ce0000',
+                    fillColor: '#ce0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_ba9d4354a3604f219aab11747e83dca3 = L.popup({maxWidth: '300'});
+
+            
+                var html_6dc6d422749245df9d2123dc3ffafe98 = $('         <div id="html_6dc6d422749245df9d2123dc3ffafe98"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_359 - Butler Place, Westminster</div>                 ')[0];
+                popup_ba9d4354a3604f219aab11747e83dca3.setContent(html_6dc6d422749245df9d2123dc3ffafe98);
+            
+
+            circle_marker_59b17f2e41ad4196b53f04309ad7e9de.bindPopup(popup_ba9d4354a3604f219aab11747e83dca3);
+
+            
+        
+        
+            
+
+            var circle_marker_8bb858a366df4ba68d927a30e8371505 = L.circle(
+                [51.511553,-0.09294],
+                100,
+                {
+                    color: '#dc0000',
+                    fillColor: '#dc0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_db42bfcaae854db6b68fef03c90492ac = L.popup({maxWidth: '300'});
+
+            
+                var html_580c5ebcc5014317bc5f0688b53a7245 = $('         <div id="html_580c5ebcc5014317bc5f0688b53a7245"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_101 - Queen Street 1, Bank</div>                 ')[0];
+                popup_db42bfcaae854db6b68fef03c90492ac.setContent(html_580c5ebcc5014317bc5f0688b53a7245);
+            
+
+            circle_marker_8bb858a366df4ba68d927a30e8371505.bindPopup(popup_db42bfcaae854db6b68fef03c90492ac);
+
+            
+        
+        
+            
+
+            var circle_marker_53d65bb345064b67acc7932c3d52c142 = L.circle(
+                [51.51824,-0.11655],
+                100,
+                {
+                    color: '#ce0000',
+                    fillColor: '#ce0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_8b6a6a8ef57b435eb3faab27a18cddce = L.popup({maxWidth: '300'});
+
+            
+                var html_c82dacecc6754467bdd073719bc331a4 = $('         <div id="html_c82dacecc6754467bdd073719bc331a4"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_436 - Red Lion Street, Holborn</div>                 ')[0];
+                popup_8b6a6a8ef57b435eb3faab27a18cddce.setContent(html_c82dacecc6754467bdd073719bc331a4);
+            
+
+            circle_marker_53d65bb345064b67acc7932c3d52c142.bindPopup(popup_8b6a6a8ef57b435eb3faab27a18cddce);
+
+            
+        
+        
+            
+
+            var circle_marker_4870fb6dd8e9444b9b56b4bc074943f8 = L.circle(
+                [51.518825,-0.108028],
+                100,
+                {
+                    color: '#dc0000',
+                    fillColor: '#dc0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_3d0658667cfb4c518c9ffa3ee0b479d9 = L.popup({maxWidth: '300'});
+
+            
+                var html_9344ebe53c084dc0969833cc9208ed5e = $('         <div id="html_9344ebe53c084dc0969833cc9208ed5e"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_67 - Hatton Garden, Holborn</div>                 ')[0];
+                popup_3d0658667cfb4c518c9ffa3ee0b479d9.setContent(html_9344ebe53c084dc0969833cc9208ed5e);
+            
+
+            circle_marker_4870fb6dd8e9444b9b56b4bc074943f8.bindPopup(popup_3d0658667cfb4c518c9ffa3ee0b479d9);
+
+            
+        
+        
+            
+
+            var circle_marker_b7c70ee5d7c44300a4fff61e47d6a1ca = L.circle(
+                [51.521661,-0.109006],
+                100,
+                {
+                    color: '#dc0000',
+                    fillColor: '#dc0000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_e723fd69e20a4987bab60fdf4740c3cc = L.popup({maxWidth: '300'});
+
+            
+                var html_17886bda6ca14ef4b10d6aff55893e1c = $('         <div id="html_17886bda6ca14ef4b10d6aff55893e1c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_17 - Hatton Wall, Holborn</div>                 ')[0];
+                popup_e723fd69e20a4987bab60fdf4740c3cc.setContent(html_17886bda6ca14ef4b10d6aff55893e1c);
+            
+
+            circle_marker_b7c70ee5d7c44300a4fff61e47d6a1ca.bindPopup(popup_e723fd69e20a4987bab60fdf4740c3cc);
+
+            
+        
+        
+            
+
+            var circle_marker_1e46083a44e743feb4557d8629a62fab = L.circle(
+                [51.51222,-0.160785],
+                100,
+                {
+                    color: '#f60000',
+                    fillColor: '#f60000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_1e7a758bb97a42beb51c36fb3a7ecc4b = L.popup({maxWidth: '300'});
+
+            
+                var html_d176635de46441408e8f6cf6302d3c35 = $('         <div id="html_d176635de46441408e8f6cf6302d3c35"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_406 - Speakers&#39; Corner 2, Hyde Park</div>                 ')[0];
+                popup_1e7a758bb97a42beb51c36fb3a7ecc4b.setContent(html_d176635de46441408e8f6cf6302d3c35);
+            
+
+            circle_marker_1e46083a44e743feb4557d8629a62fab.bindPopup(popup_1e7a758bb97a42beb51c36fb3a7ecc4b);
+
+            
+        
+        
+            
+
+            var circle_marker_436500f38e934df2bf19282d1836fa93 = L.circle(
+                [51.502042,-0.1844],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_f26cd684a670477c85dc170bffdd5f73 = L.popup({maxWidth: '300'});
+
+            
+                var html_c156d0fefeef4cc0ada8323adf722dd3 = $('         <div id="html_c156d0fefeef4cc0ada8323adf722dd3"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_404 - Palace Gate, Kensington Gardens</div>                 ')[0];
+                popup_f26cd684a670477c85dc170bffdd5f73.setContent(html_c156d0fefeef4cc0ada8323adf722dd3);
+            
+
+            circle_marker_436500f38e934df2bf19282d1836fa93.bindPopup(popup_f26cd684a670477c85dc170bffdd5f73);
+
+            
+        
+        
+            
+
+            var circle_marker_c32fad6ca7724a90b5f69c861332c638 = L.circle(
+                [51.514499,-0.141423],
+                100,
+                {
+                    color: '#ff2121',
+                    fillColor: '#ff2121',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_8411e5d7292940db9efbc9b1fbdb2e54 = L.popup({maxWidth: '300'});
+
+            
+                var html_cd22b81ec0744df2bd6cc2fcb5498915 = $('         <div id="html_cd22b81ec0744df2bd6cc2fcb5498915"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_116 - Little Argyll Street, West End</div>                 ')[0];
+                popup_8411e5d7292940db9efbc9b1fbdb2e54.setContent(html_cd22b81ec0744df2bd6cc2fcb5498915);
+            
+
+            circle_marker_c32fad6ca7724a90b5f69c861332c638.bindPopup(popup_8411e5d7292940db9efbc9b1fbdb2e54);
+
+            
+        
+        
+            
+
+            var circle_marker_b9bdd3294f43439fa1f048d9dc3ebaa0 = L.circle(
+                [51.518218,-0.100791],
+                100,
+                {
+                    color: '#e80000',
+                    fillColor: '#e80000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_c8394088e51048a6aa0c54091a7bbfd1 = L.popup({maxWidth: '300'});
+
+            
+                var html_4946d8a501bb4e77988a1041312feab0 = $('         <div id="html_4946d8a501bb4e77988a1041312feab0"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_203 - West Smithfield Rotunda, Farringdon</div>                 ')[0];
+                popup_c8394088e51048a6aa0c54091a7bbfd1.setContent(html_4946d8a501bb4e77988a1041312feab0);
+            
+
+            circle_marker_b9bdd3294f43439fa1f048d9dc3ebaa0.bindPopup(popup_c8394088e51048a6aa0c54091a7bbfd1);
+
+            
+        
+        
+            
+
+            var circle_marker_7a48d690d71b49a2ba36247c05cf9b73 = L.circle(
+                [51.516814,-0.151926],
+                100,
+                {
+                    color: '#e80000',
+                    fillColor: '#e80000',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_0fba945542804ee69883a2b6bee15302 = L.popup({maxWidth: '300'});
+
+            
+                var html_9badce4a2dba4b2aba076585d8e5b470 = $('         <div id="html_9badce4a2dba4b2aba076585d8e5b470"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_210 - Hinde Street, Marylebone</div>                 ')[0];
+                popup_0fba945542804ee69883a2b6bee15302.setContent(html_9badce4a2dba4b2aba076585d8e5b470);
+            
+
+            circle_marker_7a48d690d71b49a2ba36247c05cf9b73.bindPopup(popup_0fba945542804ee69883a2b6bee15302);
+
+            
+        
+        
+            
+
+            var circle_marker_4a62e4995dd04fabadac80c1179f2807 = L.circle(
+                [51.505013,-0.172729],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_33303b89af064a818e829a4f5802efe1 = L.popup({maxWidth: '300'});
+
+            
+                var html_d475940c8d4b4e438c1426d18b7871ab = $('         <div id="html_d475940c8d4b4e438c1426d18b7871ab"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_300 - Serpentine Car Park, Hyde Park</div>                 ')[0];
+                popup_33303b89af064a818e829a4f5802efe1.setContent(html_d475940c8d4b4e438c1426d18b7871ab);
+            
+
+            circle_marker_4a62e4995dd04fabadac80c1179f2807.bindPopup(popup_33303b89af064a818e829a4f5802efe1);
+
+            
+        
+        
+            
+
+            var circle_marker_42becfd79f82493ab7b390b3db7331c8 = L.circle(
+                [51.498125,-0.132102],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_84562c1c79694a23b255cc32be71dde1 = L.popup({maxWidth: '300'});
+
+            
+                var html_e49609065f534e399817b5f5a36a7d40 = $('         <div id="html_e49609065f534e399817b5f5a36a7d40"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_108 - Abbey Orchard Street, Westminster</div>                 ')[0];
+                popup_84562c1c79694a23b255cc32be71dde1.setContent(html_e49609065f534e399817b5f5a36a7d40);
+            
+
+            circle_marker_42becfd79f82493ab7b390b3db7331c8.bindPopup(popup_84562c1c79694a23b255cc32be71dde1);
+
+            
+        
+        
+            
+
+            var circle_marker_2c3ebf20d3804091ad7c9671363a499e = L.circle(
+                [51.496753,-0.138733],
+                100,
+                {
+                    color: '#ff0505',
+                    fillColor: '#ff0505',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_98847a5af4114a70a1640478a4b37506 = L.popup({maxWidth: '300'});
+
+            
+                var html_c7cf5cc10e364393b441c6d43a00f9d1 = $('         <div id="html_c7cf5cc10e364393b441c6d43a00f9d1"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_360 - Howick Place, Westminster</div>                 ')[0];
+                popup_98847a5af4114a70a1640478a4b37506.setContent(html_c7cf5cc10e364393b441c6d43a00f9d1);
+            
+
+            circle_marker_2c3ebf20d3804091ad7c9671363a499e.bindPopup(popup_98847a5af4114a70a1640478a4b37506);
+
+            
+        
+        
+            
+
+            var circle_marker_35f642ddb1b745a7a31c193d897e1ba0 = L.circle(
+                [51.503493,-0.07962],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_7ecd423137454f91840cb0d05a645518 = L.popup({maxWidth: '300'});
+
+            
+                var html_c16f7cddb0cf45b9a729deaf4019edf5 = $('         <div id="html_c16f7cddb0cf45b9a729deaf4019edf5"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_278 - Tooley Street, Bermondsey</div>                 ')[0];
+                popup_7ecd423137454f91840cb0d05a645518.setContent(html_c16f7cddb0cf45b9a729deaf4019edf5);
+            
+
+            circle_marker_35f642ddb1b745a7a31c193d897e1ba0.bindPopup(popup_7ecd423137454f91840cb0d05a645518);
+
+            
+        
+        
+            
+
+            var circle_marker_994ff8d25bd548c4867de0ca3dc5e0a5 = L.circle(
+                [51.506451,-0.170279],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_6ace56e012d4487d870f329fddd20ed7 = L.popup({maxWidth: '300'});
+
+            
+                var html_2ca409020e8a42e48b9d8662e789de30 = $('         <div id="html_2ca409020e8a42e48b9d8662e789de30"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_248 - Triangle Car Park, Hyde Park</div>                 ')[0];
+                popup_6ace56e012d4487d870f329fddd20ed7.setContent(html_2ca409020e8a42e48b9d8662e789de30);
+            
+
+            circle_marker_994ff8d25bd548c4867de0ca3dc5e0a5.bindPopup(popup_6ace56e012d4487d870f329fddd20ed7);
+
+            
+        
+        
+            
+
+            var circle_marker_431f11d0a1114acfbadd641ef215cbe1 = L.circle(
+                [51.518908,-0.079249],
+                100,
+                {
+                    color: '#ff0505',
+                    fillColor: '#ff0505',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_5fba9d404e8a4bceae5673499c06c9b7 = L.popup({maxWidth: '300'});
+
+            
+                var html_22918729a4c642df97e09d74b2beb302 = $('         <div id="html_22918729a4c642df97e09d74b2beb302"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_251 - Brushfield Street, Liverpool Street</div>                 ')[0];
+                popup_5fba9d404e8a4bceae5673499c06c9b7.setContent(html_22918729a4c642df97e09d74b2beb302);
+            
+
+            circle_marker_431f11d0a1114acfbadd641ef215cbe1.bindPopup(popup_5fba9d404e8a4bceae5673499c06c9b7);
+
+            
+        
+        
+            
+
+            var circle_marker_356e633854574f929bad65495c0bce81 = L.circle(
+                [51.486343,-0.122492],
+                100,
+                {
+                    color: '#ff8989',
+                    fillColor: '#ff8989',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_cc46457224a84feaa95532642281e701 = L.popup({maxWidth: '300'});
+
+            
+                var html_0bd8d1bbed1b4d1781da27dfe03d87de = $('         <div id="html_0bd8d1bbed1b4d1781da27dfe03d87de"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_270 - Kennington Lane Rail Bridge, Vauxhall</div>                 ')[0];
+                popup_cc46457224a84feaa95532642281e701.setContent(html_0bd8d1bbed1b4d1781da27dfe03d87de);
+            
+
+            circle_marker_356e633854574f929bad65495c0bce81.bindPopup(popup_cc46457224a84feaa95532642281e701);
+
+            
+        
+        
+            
+
+            var circle_marker_39437b0d9a974e21b366f4529b42c931 = L.circle(
+                [51.499806,-0.176415],
+                100,
+                {
+                    color: '#ff0505',
+                    fillColor: '#ff0505',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_785fcf6afa504b04b3ced42c5b815bb6 = L.popup({maxWidth: '300'});
+
+            
+                var html_db848a0f472c4edf8a07a305ed323d9f = $('         <div id="html_db848a0f472c4edf8a07a305ed323d9f"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_373 - Prince Consort Road, Knightsbridge</div>                 ')[0];
+                popup_785fcf6afa504b04b3ced42c5b815bb6.setContent(html_db848a0f472c4edf8a07a305ed323d9f);
+            
+
+            circle_marker_39437b0d9a974e21b366f4529b42c931.bindPopup(popup_785fcf6afa504b04b3ced42c5b815bb6);
+
+            
+        
+        
+            
+
+            var circle_marker_f0a991233b79423e8f39033bfe68c657 = L.circle(
+                [51.517075,-0.086685],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_82963b0c433a4f3a8e2db407338161cd = L.popup({maxWidth: '300'});
+
+            
+                var html_1319e0b684b9450d9cfc1bc2820282d2 = $('         <div id="html_1319e0b684b9450d9cfc1bc2820282d2"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_55 - Finsbury Circus, Liverpool Street</div>                 ')[0];
+                popup_82963b0c433a4f3a8e2db407338161cd.setContent(html_1319e0b684b9450d9cfc1bc2820282d2);
+            
+
+            circle_marker_f0a991233b79423e8f39033bfe68c657.bindPopup(popup_82963b0c433a4f3a8e2db407338161cd);
+
+            
+        
+        
+            
+
+            var circle_marker_0af6351777eb41e78ad1187c30587792 = L.circle(
+                [51.520841,-0.09734],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_32341ecd37544f56b82066752cda6ae2 = L.popup({maxWidth: '300'});
+
+            
+                var html_f716807c3a5c47c6bb15ef7ffb515489 = $('         <div id="html_f716807c3a5c47c6bb15ef7ffb515489"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_95 - Aldersgate Street, Barbican</div>                 ')[0];
+                popup_32341ecd37544f56b82066752cda6ae2.setContent(html_f716807c3a5c47c6bb15ef7ffb515489);
+            
+
+            circle_marker_0af6351777eb41e78ad1187c30587792.bindPopup(popup_32341ecd37544f56b82066752cda6ae2);
+
+            
+        
+        
+            
+
+            var circle_marker_6c839aba915a4ac88712045cd1be7cf5 = L.circle(
+                [51.505817,-0.100186],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_502d9236642048f18f49e5bfdfcf1f05 = L.popup({maxWidth: '300'});
+
+            
+                var html_9ccba4933aac4dcbbbe00c4df757417f = $('         <div id="html_9ccba4933aac4dcbbbe00c4df757417f"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_193 - Bankside Mix, Bankside</div>                 ')[0];
+                popup_502d9236642048f18f49e5bfdfcf1f05.setContent(html_9ccba4933aac4dcbbbe00c4df757417f);
+            
+
+            circle_marker_6c839aba915a4ac88712045cd1be7cf5.bindPopup(popup_502d9236642048f18f49e5bfdfcf1f05);
+
+            
+        
+        
+            
+
+            var circle_marker_fbb0e82711f04721804cb76a273f884d = L.circle(
+                [51.504942,-0.115533],
+                100,
+                {
+                    color: '#00004c',
+                    fillColor: '#00004c',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_7fa88672027240aa90c7d9aba9aef0e9 = L.popup({maxWidth: '300'});
+
+            
+                var html_23e7abd1c19846f39fbb51680f43dd5b = $('         <div id="html_23e7abd1c19846f39fbb51680f43dd5b"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_336 - Concert Hall Approach 2, South Bank</div>                 ')[0];
+                popup_7fa88672027240aa90c7d9aba9aef0e9.setContent(html_23e7abd1c19846f39fbb51680f43dd5b);
+            
+
+            circle_marker_fbb0e82711f04721804cb76a273f884d.bindPopup(popup_7fa88672027240aa90c7d9aba9aef0e9);
+
+            
+        
+        
+            
+
+            var circle_marker_4ead2f7d395341599931b20733d4c3a8 = L.circle(
+                [51.516128,-0.120909],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_7653b3960f6a4985abad3f9956935e96 = L.popup({maxWidth: '300'});
+
+            
+                var html_a590bf4d57d145809f72e99baf8e03d3 = $('         <div id="html_a590bf4d57d145809f72e99baf8e03d3"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_751 - Newton Street, Covent Garden</div>                 ')[0];
+                popup_7653b3960f6a4985abad3f9956935e96.setContent(html_a590bf4d57d145809f72e99baf8e03d3);
+            
+
+            circle_marker_4ead2f7d395341599931b20733d4c3a8.bindPopup(popup_7653b3960f6a4985abad3f9956935e96);
+
+            
+        
+        
+            
+
+            var circle_marker_2d9b33e98a9e4bddb7a384e9a5341fd1 = L.circle(
+                [51.51477,-0.122219],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_b25b468b25c2452eb943e5ce853452e1 = L.popup({maxWidth: '300'});
+
+            
+                var html_1670b51085aa4032a3f34d306c859e67 = $('         <div id="html_1670b51085aa4032a3f34d306c859e67"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_18 - Drury Lane, Covent Garden</div>                 ')[0];
+                popup_b25b468b25c2452eb943e5ce853452e1.setContent(html_1670b51085aa4032a3f34d306c859e67);
+            
+
+            circle_marker_2d9b33e98a9e4bddb7a384e9a5341fd1.bindPopup(popup_b25b468b25c2452eb943e5ce853452e1);
+
+            
+        
+        
+            
+
+            var circle_marker_9c99e6a91e244c7fb27db422a4d941fb = L.circle(
+                [51.503117,-0.15352],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_58955a38b69e438b9fb8da6cc63f1377 = L.popup({maxWidth: '300'});
+
+            
+                var html_62bdd2652ebf496688c9f8d2f0ddfc1d = $('         <div id="html_62bdd2652ebf496688c9f8d2f0ddfc1d"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_191 - Hyde Park Corner, Hyde Park</div>                 ')[0];
+                popup_58955a38b69e438b9fb8da6cc63f1377.setContent(html_62bdd2652ebf496688c9f8d2f0ddfc1d);
+            
+
+            circle_marker_9c99e6a91e244c7fb27db422a4d941fb.bindPopup(popup_58955a38b69e438b9fb8da6cc63f1377);
+
+            
+        
+        
+            
+
+            var circle_marker_ce11528a3e53428a97dff612be0330bb = L.circle(
+                [51.515208,-0.117863],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_0e226249629f46b4b46a7f590adb2069 = L.popup({maxWidth: '300'});
+
+            
+                var html_2344ea73f02e430991ad425c07f3c740 = $('         <div id="html_2344ea73f02e430991ad425c07f3c740"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_372 - Sardinia Street, Holborn</div>                 ')[0];
+                popup_0e226249629f46b4b46a7f590adb2069.setContent(html_2344ea73f02e430991ad425c07f3c740);
+            
+
+            circle_marker_ce11528a3e53428a97dff612be0330bb.bindPopup(popup_0e226249629f46b4b46a7f590adb2069);
+
+            
+        
+        
+            
+
+            var circle_marker_abd279f626db4d8db9fd6b5cc89b91ee = L.circle(
+                [51.519069,-0.088285],
+                100,
+                {
+                    color: '#ff3d3d',
+                    fillColor: '#ff3d3d',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_7443c45ba3dc4a66bf800135d2d6aaff = L.popup({maxWidth: '300'});
+
+            
+                var html_b6aec65d89944017b7c74653e92d3aac = $('         <div id="html_b6aec65d89944017b7c74653e92d3aac"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_215 - Moorfields, Moorgate</div>                 ')[0];
+                popup_7443c45ba3dc4a66bf800135d2d6aaff.setContent(html_b6aec65d89944017b7c74653e92d3aac);
+            
+
+            circle_marker_abd279f626db4d8db9fd6b5cc89b91ee.bindPopup(popup_7443c45ba3dc4a66bf800135d2d6aaff);
+
+            
+        
+        
+            
+
+            var circle_marker_cc4a09812f3343a68cf758497eb6c330 = L.circle(
+                [51.512118,-0.162097],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_45199d3ac0364d39a1980886eb4c1bee = L.popup({maxWidth: '300'});
+
+            
+                var html_6cacc5f0621d4f599478fd87c3a2c05b = $('         <div id="html_6cacc5f0621d4f599478fd87c3a2c05b"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_304 - Cumberland Gate, Hyde Park</div>                 ')[0];
+                popup_45199d3ac0364d39a1980886eb4c1bee.setContent(html_6cacc5f0621d4f599478fd87c3a2c05b);
+            
+
+            circle_marker_cc4a09812f3343a68cf758497eb6c330.bindPopup(popup_45199d3ac0364d39a1980886eb4c1bee);
+
+            
+        
+        
+            
+
+            var circle_marker_d30a2eea8333492599527482ad704eb6 = L.circle(
+                [51.512303,-0.159988],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_87b1ac76044846648e5ff9d378177faa = L.popup({maxWidth: '300'});
+
+            
+                var html_6c5e7d423b434960b3164ee06e1431cc = $('         <div id="html_6c5e7d423b434960b3164ee06e1431cc"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_407 - Speakers&#39; Corner 1, Hyde Park</div>                 ')[0];
+                popup_87b1ac76044846648e5ff9d378177faa.setContent(html_6c5e7d423b434960b3164ee06e1431cc);
+            
+
+            circle_marker_d30a2eea8333492599527482ad704eb6.bindPopup(popup_87b1ac76044846648e5ff9d378177faa);
+
+            
+        
+        
+            
+
+            var circle_marker_566c2f38e3d9426695b49850e8828216 = L.circle(
+                [51.494412,-0.173881],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_f9f0c02fd4514908818c354ecdb63cd7 = L.popup({maxWidth: '300'});
+
+            
+                var html_6749de21095243bf843e462b94038af9 = $('         <div id="html_6749de21095243bf843e462b94038af9"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_356 - South Kensington Station, South Kensington</div>                 ')[0];
+                popup_f9f0c02fd4514908818c354ecdb63cd7.setContent(html_6749de21095243bf843e462b94038af9);
+            
+
+            circle_marker_566c2f38e3d9426695b49850e8828216.bindPopup(popup_f9f0c02fd4514908818c354ecdb63cd7);
+
+            
+        
+        
+            
+
+            var circle_marker_a6a0791705d5498e8da4789d4e906bbf = L.circle(
+                [51.516154,-0.082422],
+                100,
+                {
+                    color: '#ff8989',
+                    fillColor: '#ff8989',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_61101a93fa4747868a29d1587dd841a0 = L.popup({maxWidth: '300'});
+
+            
+                var html_665bcc47c8b24312a86ae6cb816131d6 = $('         <div id="html_665bcc47c8b24312a86ae6cb816131d6"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_217 - Wormwood Street, Liverpool Street</div>                 ')[0];
+                popup_61101a93fa4747868a29d1587dd841a0.setContent(html_665bcc47c8b24312a86ae6cb816131d6);
+            
+
+            circle_marker_a6a0791705d5498e8da4789d4e906bbf.bindPopup(popup_61101a93fa4747868a29d1587dd841a0);
+
+            
+        
+        
+            
+
+            var circle_marker_bc1d1515a01249dcb7bb1c030e77c97d = L.circle(
+                [51.520596,-0.116688],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_c60b1ef356054fb2ac7c591b4f366833 = L.popup({maxWidth: '300'});
+
+            
+                var html_e886948ad017456880e957a0538731a4 = $('         <div id="html_e886948ad017456880e957a0538731a4"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_68 - Theobalds Road, Holborn</div>                 ')[0];
+                popup_c60b1ef356054fb2ac7c591b4f366833.setContent(html_e886948ad017456880e957a0538731a4);
+            
+
+            circle_marker_bc1d1515a01249dcb7bb1c030e77c97d.bindPopup(popup_c60b1ef356054fb2ac7c591b4f366833);
+
+            
+        
+        
+            
+
+            var circle_marker_eee9ce2f77a94d478228c78112827024 = L.circle(
+                [51.499917,-0.174554],
+                100,
+                {
+                    color: '#ff5555',
+                    fillColor: '#ff5555',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_60039ebcf5944d4eb8b982d05f7b377e = L.popup({maxWidth: '300'});
+
+            
+                var html_61f8f350430344c595fa7ca9e0131817 = $('         <div id="html_61f8f350430344c595fa7ca9e0131817"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_428 - Exhibition Road, Knightsbridge</div>                 ')[0];
+                popup_60039ebcf5944d4eb8b982d05f7b377e.setContent(html_61f8f350430344c595fa7ca9e0131817);
+            
+
+            circle_marker_eee9ce2f77a94d478228c78112827024.bindPopup(popup_60039ebcf5944d4eb8b982d05f7b377e);
+
+            
+        
+        
+            
+
+            var circle_marker_c44499daac3d4948ae01abfe22467409 = L.circle(
+                [51.509908,-0.187842],
+                100,
+                {
+                    color: '#f1f1ff',
+                    fillColor: '#f1f1ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_32cab2e754a94bfb9a9199b08d8f47c8 = L.popup({maxWidth: '300'});
+
+            
+                var html_f76e550197174fd3871cff233f5cb43c = $('         <div id="html_f76e550197174fd3871cff233f5cb43c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_307 - Black Lion Gate, Kensington Gardens</div>                 ')[0];
+                popup_32cab2e754a94bfb9a9199b08d8f47c8.setContent(html_f76e550197174fd3871cff233f5cb43c);
+            
+
+            circle_marker_c44499daac3d4948ae01abfe22467409.bindPopup(popup_32cab2e754a94bfb9a9199b08d8f47c8);
+
+            
+        
+        
+            
+
+            var circle_marker_62c32304e2144fb2b1d9b1426aa2c879 = L.circle(
+                [51.523418,-0.124121],
+                100,
+                {
+                    color: '#ff7171',
+                    fillColor: '#ff7171',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_fdf32e695658452d9806930ef5af6e9c = L.popup({maxWidth: '300'});
+
+            
+                var html_4612957b493841dd9ecbae3060acd94d = $('         <div id="html_4612957b493841dd9ecbae3060acd94d"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_77 - Russell Square Station, Bloomsbury</div>                 ')[0];
+                popup_fdf32e695658452d9806930ef5af6e9c.setContent(html_4612957b493841dd9ecbae3060acd94d);
+            
+
+            circle_marker_62c32304e2144fb2b1d9b1426aa2c879.bindPopup(popup_fdf32e695658452d9806930ef5af6e9c);
+
+            
+        
+        
+            
+
+            var circle_marker_092d4f3dcb314d84b64e0bcedf1a19e2 = L.circle(
+                [51.535678,-0.062546],
+                100,
+                {
+                    color: '#fff1f1',
+                    fillColor: '#fff1f1',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_4f6e6b92f0f24c9f8b99858245cdc49b = L.popup({maxWidth: '300'});
+
+            
+                var html_bbd41aec4eed45a597738e55fe192502 = $('         <div id="html_bbd41aec4eed45a597738e55fe192502"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_553 - Regents Row, Haggerston</div>                 ')[0];
+                popup_4f6e6b92f0f24c9f8b99858245cdc49b.setContent(html_bbd41aec4eed45a597738e55fe192502);
+            
+
+            circle_marker_092d4f3dcb314d84b64e0bcedf1a19e2.bindPopup(popup_4f6e6b92f0f24c9f8b99858245cdc49b);
+
+            
+        
+        
+            
+
+            var circle_marker_69d0fe1887154d64a14508d06d3a1f36 = L.circle(
+                [51.511834,-0.174292],
+                100,
+                {
+                    color: '#ff8989',
+                    fillColor: '#ff8989',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_a9455cec3ff8499fb8d283ad07c56654 = L.popup({maxWidth: '300'});
+
+            
+                var html_296a5e3b11bd4b478f1e00d0b69d6225 = $('         <div id="html_296a5e3b11bd4b478f1e00d0b69d6225"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_153 - Bayswater Road, Hyde Park</div>                 ')[0];
+                popup_a9455cec3ff8499fb8d283ad07c56654.setContent(html_296a5e3b11bd4b478f1e00d0b69d6225);
+            
+
+            circle_marker_69d0fe1887154d64a14508d06d3a1f36.bindPopup(popup_a9455cec3ff8499fb8d283ad07c56654);
+
+            
+        
+        
+            
+
+            var circle_marker_66b6187579894861ab9b6137c68950ed = L.circle(
+                [51.511594,-0.077121],
+                100,
+                {
+                    color: '#ff8989',
+                    fillColor: '#ff8989',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_4df9c7105285485c867eb72a6c1f87f0 = L.popup({maxWidth: '300'});
+
+            
+                var html_764104176572487cbd9331ac82318df4 = $('         <div id="html_764104176572487cbd9331ac82318df4"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_104 - Crosswall, Tower</div>                 ')[0];
+                popup_4df9c7105285485c867eb72a6c1f87f0.setContent(html_764104176572487cbd9331ac82318df4);
+            
+
+            circle_marker_66b6187579894861ab9b6137c68950ed.bindPopup(popup_4df9c7105285485c867eb72a6c1f87f0);
+
+            
+        
+        
+            
+
+            var circle_marker_ad72682e57b242e095baad19883a8d9c = L.circle(
+                [51.520017,-0.083911],
+                100,
+                {
+                    color: '#ff7171',
+                    fillColor: '#ff7171',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_9015f3edd1ba4cee9d8653b6219e3f9e = L.popup({maxWidth: '300'});
+
+            
+                var html_5b50823393b64ba4b6fc3367fd9cfb45 = $('         <div id="html_5b50823393b64ba4b6fc3367fd9cfb45"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_41 - Sun Street, Liverpool Street</div>                 ')[0];
+                popup_9015f3edd1ba4cee9d8653b6219e3f9e.setContent(html_5b50823393b64ba4b6fc3367fd9cfb45);
+            
+
+            circle_marker_ad72682e57b242e095baad19883a8d9c.bindPopup(popup_9015f3edd1ba4cee9d8653b6219e3f9e);
+
+            
+        
+        
+            
+
+            var circle_marker_e05c32d990e44cbf8f834d84d80b4afc = L.circle(
+                [51.519064,-0.059642],
+                100,
+                {
+                    color: '#ff7171',
+                    fillColor: '#ff7171',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_703c605d55e04fa7873402a55ea7112c = L.popup({maxWidth: '300'});
+
+            
+                var html_db531f39d55d41648e3632cab132195f = $('         <div id="html_db531f39d55d41648e3632cab132195f"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_282 - Royal London Hospital, Whitechapel</div>                 ')[0];
+                popup_703c605d55e04fa7873402a55ea7112c.setContent(html_db531f39d55d41648e3632cab132195f);
+            
+
+            circle_marker_e05c32d990e44cbf8f834d84d80b4afc.bindPopup(popup_703c605d55e04fa7873402a55ea7112c);
+
+            
+        
+        
+            
+
+            var circle_marker_7eab5c3a3c154f2eab3cabf026a6c937 = L.circle(
+                [51.512515,-0.133201],
+                100,
+                {
+                    color: '#ffd9d9',
+                    fillColor: '#ffd9d9',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_e7d95b60ef92451bae26386e3806d540 = L.popup({maxWidth: '300'});
+
+            
+                var html_9bb16bc642c34f9cbcfe0b215e30c3f8 = $('         <div id="html_9bb16bc642c34f9cbcfe0b215e30c3f8"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_192 - Wardour Street, Soho</div>                 ')[0];
+                popup_e7d95b60ef92451bae26386e3806d540.setContent(html_9bb16bc642c34f9cbcfe0b215e30c3f8);
+            
+
+            circle_marker_7eab5c3a3c154f2eab3cabf026a6c937.bindPopup(popup_e7d95b60ef92451bae26386e3806d540);
+
+            
+        
+        
+            
+
+            var circle_marker_9379d12c846348559e933aaa18986144 = L.circle(
+                [51.504027,-0.113864],
+                100,
+                {
+                    color: '#2121ff',
+                    fillColor: '#2121ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_1420a3ad0ca648dc9a29a45978ad431b = L.popup({maxWidth: '300'});
+
+            
+                var html_ec89c35d44a740fe922c9bdcf9e8fafe = $('         <div id="html_ec89c35d44a740fe922c9bdcf9e8fafe"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_374 - Waterloo Station 1, Waterloo</div>                 ')[0];
+                popup_1420a3ad0ca648dc9a29a45978ad431b.setContent(html_ec89c35d44a740fe922c9bdcf9e8fafe);
+            
+
+            circle_marker_9379d12c846348559e933aaa18986144.bindPopup(popup_1420a3ad0ca648dc9a29a45978ad431b);
+
+            
+        
+        
+            
+
+            var circle_marker_09ac6ab61ab14627af4469991ad8b3c1 = L.circle(
+                [51.504627,-0.091773],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_2dd687fbfe0145b48c02b506cffa9e48 = L.popup({maxWidth: '300'});
+
+            
+                var html_130730614d81448eb372f3815d2e2e00 = $('         <div id="html_130730614d81448eb372f3815d2e2e00"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_194 - Hop Exchange, The Borough</div>                 ')[0];
+                popup_2dd687fbfe0145b48c02b506cffa9e48.setContent(html_130730614d81448eb372f3815d2e2e00);
+            
+
+            circle_marker_09ac6ab61ab14627af4469991ad8b3c1.bindPopup(popup_2dd687fbfe0145b48c02b506cffa9e48);
+
+            
+        
+        
+            
+
+            var circle_marker_efade7b653894d5094608f91ac7cefca = L.circle(
+                [51.497684,-0.141943],
+                100,
+                {
+                    color: '#f1f1ff',
+                    fillColor: '#f1f1ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_466a669789644d67a4c654707bd0f864 = L.popup({maxWidth: '300'});
+
+            
+                var html_1f8ae376ea104ab5ad084f3585068689 = $('         <div id="html_1f8ae376ea104ab5ad084f3585068689"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_316 - Cardinal Place, Victoria</div>                 ')[0];
+                popup_466a669789644d67a4c654707bd0f864.setContent(html_1f8ae376ea104ab5ad084f3585068689);
+            
+
+            circle_marker_efade7b653894d5094608f91ac7cefca.bindPopup(popup_466a669789644d67a4c654707bd0f864);
+
+            
+        
+        
+            
+
+            var circle_marker_39d79925b20f4409ac433c22c840bc3b = L.circle(
+                [51.508103,-0.126021],
+                100,
+                {
+                    color: '#f1f1ff',
+                    fillColor: '#f1f1ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_93aab46749714d0ca06c31077acd0a96 = L.popup({maxWidth: '300'});
+
+            
+                var html_518ac7122e634235865ad626ff489e53 = $('         <div id="html_518ac7122e634235865ad626ff489e53"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_341 - Craven Street, Strand</div>                 ')[0];
+                popup_93aab46749714d0ca06c31077acd0a96.setContent(html_518ac7122e634235865ad626ff489e53);
+            
+
+            circle_marker_39d79925b20f4409ac433c22c840bc3b.bindPopup(popup_93aab46749714d0ca06c31077acd0a96);
+
+            
+        
+        
+            
+
+            var circle_marker_1743ebda518446df8db0b37d37954306 = L.circle(
+                [51.501444,-0.110699],
+                100,
+                {
+                    color: '#ffbdbd',
+                    fillColor: '#ffbdbd',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_f9dd14d9c41244f1a1ee35be48a88f26 = L.popup({maxWidth: '300'});
+
+            
+                var html_3c26a36d77d04bc5b27438e183593014 = $('         <div id="html_3c26a36d77d04bc5b27438e183593014"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_272 - Baylis Road, Waterloo</div>                 ')[0];
+                popup_f9dd14d9c41244f1a1ee35be48a88f26.setContent(html_3c26a36d77d04bc5b27438e183593014);
+            
+
+            circle_marker_1743ebda518446df8db0b37d37954306.bindPopup(popup_f9dd14d9c41244f1a1ee35be48a88f26);
+
+            
+        
+        
+            
+
+            var circle_marker_7ff7e35540e641b38d6ddd8aeebd34d9 = L.circle(
+                [51.503791,-0.112824],
+                100,
+                {
+                    color: '#ffd9d9',
+                    fillColor: '#ffd9d9',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_e49cc1dfce194f0cb62503eddc8c5985 = L.popup({maxWidth: '300'});
+
+            
+                var html_5c178ff44f634c80aa0b0682e6d5a3f3 = $('         <div id="html_5c178ff44f634c80aa0b0682e6d5a3f3"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_154 - Waterloo Station 3, Waterloo</div>                 ')[0];
+                popup_e49cc1dfce194f0cb62503eddc8c5985.setContent(html_5c178ff44f634c80aa0b0682e6d5a3f3);
+            
+
+            circle_marker_7ff7e35540e641b38d6ddd8aeebd34d9.bindPopup(popup_e49cc1dfce194f0cb62503eddc8c5985);
+
+            
+        
+        
+            
+
+            var circle_marker_58baef650bc44318bb00fdd440a1a315 = L.circle(
+                [51.48894,-0.111435],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_746c198356a24f159876b5adcbb22b90 = L.popup({maxWidth: '300'});
+
+            
+                var html_02704356c7094f478aa1a8bad3e8c49c = $('         <div id="html_02704356c7094f478aa1a8bad3e8c49c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_144 - Kennington Cross, Kennington</div>                 ')[0];
+                popup_746c198356a24f159876b5adcbb22b90.setContent(html_02704356c7094f478aa1a8bad3e8c49c);
+            
+
+            circle_marker_58baef650bc44318bb00fdd440a1a315.bindPopup(popup_746c198356a24f159876b5adcbb22b90);
+
+            
+        
+        
+            
+
+            var circle_marker_952caed85dd44d98a9c7aa868766570f = L.circle(
+                [51.523648,-0.074754],
+                100,
+                {
+                    color: '#fff1f1',
+                    fillColor: '#fff1f1',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_3e302c059a654e878e116305d5a1aa27 = L.popup({maxWidth: '300'});
+
+            
+                var html_7db17fc673e348168587a27a9af6c02e = $('         <div id="html_7db17fc673e348168587a27a9af6c02e"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_132 - Bethnal Green Road, Shoreditch</div>                 ')[0];
+                popup_3e302c059a654e878e116305d5a1aa27.setContent(html_7db17fc673e348168587a27a9af6c02e);
+            
+
+            circle_marker_952caed85dd44d98a9c7aa868766570f.bindPopup(popup_3e302c059a654e878e116305d5a1aa27);
+
+            
+        
+        
+            
+
+            var circle_marker_51945ac7ad644e8a913715510fc2e617 = L.circle(
+                [51.509462,-0.124749],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_c525f8a8237e42228e01e3c663be34c0 = L.popup({maxWidth: '300'});
+
+            
+                var html_0290e4553a214e60b027cd7a8030a43c = $('         <div id="html_0290e4553a214e60b027cd7a8030a43c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_64 - William Iv Street, Strand</div>                 ')[0];
+                popup_c525f8a8237e42228e01e3c663be34c0.setContent(html_0290e4553a214e60b027cd7a8030a43c);
+            
+
+            circle_marker_51945ac7ad644e8a913715510fc2e617.bindPopup(popup_c525f8a8237e42228e01e3c663be34c0);
+
+            
+        
+        
+            
+
+            var circle_marker_3ecf256cbd604d44950e0d1bf63de09a = L.circle(
+                [51.515631,-0.132328],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_310dcc558759433e8152b4a42de8337f = L.popup({maxWidth: '300'});
+
+            
+                var html_edb8eea3b1674f9eab148fa4f9ccf518 = $('         <div id="html_edb8eea3b1674f9eab148fa4f9ccf518"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_109 - Soho Square, Soho</div>                 ')[0];
+                popup_310dcc558759433e8152b4a42de8337f.setContent(html_edb8eea3b1674f9eab148fa4f9ccf518);
+            
+
+            circle_marker_3ecf256cbd604d44950e0d1bf63de09a.bindPopup(popup_310dcc558759433e8152b4a42de8337f);
+
+            
+        
+        
+            
+
+            var circle_marker_023fb1652df0474d839aae3f85f7303d = L.circle(
+                [51.503919,-0.113426],
+                100,
+                {
+                    color: '#d9d9ff',
+                    fillColor: '#d9d9ff',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_a353b3babcec4218b0ce1bf8e67e1363 = L.popup({maxWidth: '300'});
+
+            
+                var html_0216365638504affbae319190e5ae453 = $('         <div id="html_0216365638504affbae319190e5ae453"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_361 - Waterloo Station 2, Waterloo</div>                 ')[0];
+                popup_a353b3babcec4218b0ce1bf8e67e1363.setContent(html_0216365638504affbae319190e5ae453);
+            
+
+            circle_marker_023fb1652df0474d839aae3f85f7303d.bindPopup(popup_a353b3babcec4218b0ce1bf8e67e1363);
+
+            
+        
+        
+            
+
+            var circle_marker_dfd216df8b2e47cabdd32a154ce10ea8 = L.circle(
+                [51.524438,-0.138019],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_a5ddd0b492494a7d8d2503fa4dc4cacd = L.popup({maxWidth: '300'});
+
+            
+                var html_18abc3f7994d41c3b22969d618fb6d7c = $('         <div id="html_18abc3f7994d41c3b22969d618fb6d7c"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_239 - Warren Street Station, Euston</div>                 ')[0];
+                popup_a5ddd0b492494a7d8d2503fa4dc4cacd.setContent(html_18abc3f7994d41c3b22969d618fb6d7c);
+            
+
+            circle_marker_dfd216df8b2e47cabdd32a154ce10ea8.bindPopup(popup_a5ddd0b492494a7d8d2503fa4dc4cacd);
+
+            
+        
+        
+            
+
+            var circle_marker_79eaa52b441943fd86c33525aa44cd94 = L.circle(
+                [51.534504,-0.106992],
+                100,
+                {
+                    color: '#ffa5a5',
+                    fillColor: '#ffa5a5',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_7f151bcc663e4a53b01b3ea9c51e04ca = L.popup({maxWidth: '300'});
+
+            
+                var html_dc1ea967c6c74b92b48a65d345056da2 = $('         <div id="html_dc1ea967c6c74b92b48a65d345056da2"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_234 - Liverpool Road (N1 Centre), Angel</div>                 ')[0];
+                popup_7f151bcc663e4a53b01b3ea9c51e04ca.setContent(html_dc1ea967c6c74b92b48a65d345056da2);
+            
+
+            circle_marker_79eaa52b441943fd86c33525aa44cd94.bindPopup(popup_7f151bcc663e4a53b01b3ea9c51e04ca);
+
+            
+        
+        
+            
+
+            var circle_marker_eda7c75d40a4487cbebc935c2be93b5a = L.circle(
+                [51.511968,-0.120718],
+                100,
+                {
+                    color: '#ffbdbd',
+                    fillColor: '#ffbdbd',
+                    fillOpacity: 0.6
+                    }
+                )
+                .addTo(map_670e4bcf88de4ae28f386c1f27c4a437);
+            
+        
+            
+            var popup_f8a6e6fe5ca642c6bea6f0438daa027a = L.popup({maxWidth: '300'});
+
+            
+                var html_5d0a2682707a477fae1e970fc86673a9 = $('         <div id="html_5d0a2682707a477fae1e970fc86673a9"                 style="width: 100.0%; height: 100.0%;">                 BikePoints_335 - Tavistock Street, Covent Garden</div>                 ')[0];
+                popup_f8a6e6fe5ca642c6bea6f0438daa027a.setContent(html_5d0a2682707a477fae1e970fc86673a9);
+            
+
+            circle_marker_eda7c75d40a4487cbebc935c2be93b5a.bindPopup(popup_f8a6e6fe5ca642c6bea6f0438daa027a);
+
+            
+        
+        
+        
+        </script>
+        

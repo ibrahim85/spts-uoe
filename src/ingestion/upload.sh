@@ -17,3 +17,4 @@ ZIP_STATUS=$?
 if [[ "$ZIP_STATUS" == 0 ]]; then
     aws s3 mv --quiet $COMPRESSED_FILE s3://$BUCKET/$COMPRESSED_FILE
 fi
+

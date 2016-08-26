@@ -20,9 +20,11 @@ def map_priority_color(priority):
         return '#ffff1a', '#b3b300'
 
 def create_london_map():
-    return folium.Map(location=[lon_center_latitude, lon_center_longitude], zoom_start=12,
+    londonmap = folium.Map(location=[lon_center_latitude, lon_center_longitude], zoom_start=12,
                       min_lat=lon_min_latitude, max_lat=lon_max_latitude,
                       min_lon=lon_min_longitude, max_lon=lon_max_longitude)
+    folium.TileLayer('stamentoner').add_to(londonmap)
+    return londonmap
 
 
 def draw_stations_map(stations_df, create_marker, london_map=None):
